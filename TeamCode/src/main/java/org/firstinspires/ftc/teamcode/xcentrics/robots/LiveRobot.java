@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.xcentrics.robots;
 
+
 import com.pedropathing.follower.Follower;
-import com.pedropathing.geometry.Pose;
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
@@ -24,7 +25,7 @@ public class LiveRobot extends Robot{
 
     public LiveRobot(LinearOpMode opMode) {
         super(opMode);
-        follower    = Constants.createFollower(hwmap);
+        follower    = null;
         intake = new intake(this);
         shooter = new Shooter(this);
     }
@@ -34,7 +35,7 @@ public class LiveRobot extends Robot{
     public void update(){
         super.update();
         follower.update();
-       lastPose = follower.getPose();
+       lastPose = follower.pose();
     }
     public void startup(){
         isRed = true;
@@ -54,7 +55,7 @@ public class LiveRobot extends Robot{
      * Get current robot pose from vision or follower
      */
     public Pose getRobotPose() {
-        return follower.getPose();
+        return follower.pose();
     }
     private volatile long startTime = 0; // in nanoseconds
     public void halt(double seconds) {

@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Comp;
 
-import com.bylazar.gamepad.GamepadManager;
-import com.bylazar.gamepad.PanelsGamepad;
+
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 
@@ -12,12 +11,10 @@ import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 
 @TeleOp(name = "TeleOp")
 public class TeleopLive extends LiveTeleopBase {
-    private GamepadManager g1 = PanelsGamepad.INSTANCE.getFirstManager();
-    private GamepadManager g2 = PanelsGamepad.INSTANCE.getSecondManager();
 
     @Override
     public void on_init() {
-        robot.follower.
+        robot.follower.setPose(robot.getRobotPose());
     }
 
     @Override
@@ -32,8 +29,7 @@ public class TeleopLive extends LiveTeleopBase {
 
     @Override
     public void on_loop() {
-        gamepad1 = g1.asCombinedFTCGamepad(gamepad1);
-        gamepad2 = g2.asCombinedFTCGamepad(gamepad2);
+
 
         robot.follower.manual(
                 0 - gamepad1.left_stick_y,

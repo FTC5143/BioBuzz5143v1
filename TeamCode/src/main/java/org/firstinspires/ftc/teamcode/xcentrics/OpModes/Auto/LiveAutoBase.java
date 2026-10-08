@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto;
 
-import com.pedropathing.paths.PathChain;
+import com.pedropathing.paths.Path;
+import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
@@ -42,18 +43,11 @@ public abstract class LiveAutoBase extends LinearOpMode {
     protected void halt(double seconds) {
         robot.halt(seconds);
     }
-    protected void followPath(PathChain p, double m, boolean h){
-        robot.follower.setMaxPower(m);
-        robot.follower.followPath(p,h);
+
+    protected void followPath(Path p){
+        robot.follower.follow(p);
     }
-    protected void followPath(PathChain p){
-        robot.follower.followPath(p);
-    }
-    protected void followPath(PathChain p, double m){
-        robot.follower.setMaxPower(m);
-        robot.follower.followPath(p);
-    }
-    protected void followPath(PathChain p, boolean h){
-        robot.follower.followPath(p,h);
+    protected void followPath(Path p, boolean h){
+        robot.follower.follow(p);
     }
 }

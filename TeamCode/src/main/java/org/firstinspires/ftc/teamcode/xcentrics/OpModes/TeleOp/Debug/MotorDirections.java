@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Debug;
 
 
-import com.bylazar.configurables.annotations.Configurable;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@Configurable
+
 @TeleOp(name = "Motor Directions", group = "Teleop Test")
 public class MotorDirections extends OpMode {
     

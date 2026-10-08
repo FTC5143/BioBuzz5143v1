@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.xcentrics.components.live;
 
 
-import com.bylazar.configurables.annotations.Configurable;
+
+import com.aaravdhawan25.pidautotuner.ftc.dashboard.AutoTuneDash;
+import com.pedropathing.tuning.autotune.Tuner;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -13,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
-@Configurable
+@AutoTuneDash
 class LauncherConfig{
     public static int TARGET_VELO = 1250;
     public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);

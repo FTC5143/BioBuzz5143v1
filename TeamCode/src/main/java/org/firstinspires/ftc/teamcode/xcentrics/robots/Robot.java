@@ -5,9 +5,8 @@ package org.firstinspires.ftc.teamcode.xcentrics.robots;
 
 //port static org.firstinspires.ftc.teamcode.xcentrics.components.live.Turret.flyError;
 
-import com.bylazar.telemetry.TelemetryManager;
-import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.telemetry.PanelsTelemetry;
+
+import com.aaravdhawan25.pidautotuner.ftc.dashboard.AutoTuneTelemetry;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Configurable
+
 class RobotConfig {
     // Interval in cycles at which we call update on al the components
 
@@ -64,6 +63,8 @@ public class Robot {
     
     Telemetry telemetry;
 
+    AutoTuneTelemetry autoTuneTelemetry;
+
     protected long last_update = System.nanoTime();
     protected int update_freq = 0;
 
@@ -73,7 +74,7 @@ public class Robot {
 
     List<LynxModule> expansion_hubs;
     
-    public TelemetryManager panelsTelemetry;
+
 
     // The Update Thread
     // Should be called as fast as possible. Does all reads and writes to the rev hub
@@ -103,9 +104,9 @@ public class Robot {
 
         this.hwmap  = opmode.hardwareMap;
         registerHardware(this.hwmap);
+        autoTuneTelemetry = new AutoTuneTelemetry(this.hwmap,telemetry);
 
         this.telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE); // Begone jumpy telemetry
-        panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
     }
 
     
@@ -163,7 +164,7 @@ public class Robot {
             }
 
             telemetry.update();
-            panelsTelemetry.update();
+            autoTuneTelemetry.update();
         }
 
         // Recalculate our update thread frequency
@@ -194,7 +195,7 @@ public class Robot {
     }
     public void addData(String caption, Object value){
         telemetry.addData(caption,value);
-        panelsTelemetry.debug(caption + ":" + value);
+        autoTuneTelemetry.addData(caption,value);
     }
 
     public void registerComponent(Component component) {

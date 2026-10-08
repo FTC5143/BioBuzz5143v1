@@ -77,11 +77,11 @@ public abstract class Component {
     }
     public void addData(String caption,Object vaule){
         telemetry.addData(caption,vaule);
-        robot.panelsTelemetry.addData(caption,vaule);
+
     }
     public void addLine(String caption){
         telemetry.addLine(caption);
-        robot.panelsTelemetry.addLine(caption);
+
     }
     // internal time tracking
 
