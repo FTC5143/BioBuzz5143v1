@@ -26,6 +26,7 @@ package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Comp;
 
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
+import com.aaravdhawan25.pidautotuner.ftc.dashboard.AutoTuneDash;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -48,7 +49,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * Since the dynamics of a launcher wheel system varies greatly from those of most other FTC mechanisms,
  * we will also need to adjust the "PIDF" coefficients with some that are a better fit for our application.
  */
-
+@AutoTuneDash
 @TeleOp(name = "Mec BioBuzz StarterBot Teleop", group = "StarterBot")
 //@Disabled
 public class BioBuzzStarterbotTeleopMecanum extends OpMode {
@@ -75,8 +76,8 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    public final int LAUNCHER_TARGET_VELOCITY = 1250; //2678 RPM
-    public final int LAUNCHER_MIN_VELOCITY = 1200; //2571 RPM
+    public static int LAUNCHER_TARGET_VELOCITY = 1450; //2678 RPM
+    public static int LAUNCHER_MIN_VELOCITY = 1500; //2571 RPM
 
 
     /*
