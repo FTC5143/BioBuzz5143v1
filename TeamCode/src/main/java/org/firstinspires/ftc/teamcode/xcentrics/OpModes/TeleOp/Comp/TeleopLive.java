@@ -37,21 +37,16 @@ public class TeleopLive extends LiveTeleopBase {
                 0 - gamepad1.right_stick_x
         );
 
-        if(gamepad2.a){
-            robot.shooter.spinGate();
-        } else {
-            robot.shooter.stopGate();
-        }
 
-        if(gamepad2.y){
+        if(gamepad2.y) {
             robot.shooter.spinUp();
-        } else if (gamepad2.x) {
+        } else {
             robot.shooter.spinDown();
         }
 
-        if(gamepad2.left_bumper){
+        if(gamepad1.left_bumper){
             robot.intake.reverse();
-        } else if (gamepad2.right_bumper) {
+        } else if (gamepad1.right_bumper) {
             robot.intake.intake();
         } else {
             robot.intake.stopIntake();

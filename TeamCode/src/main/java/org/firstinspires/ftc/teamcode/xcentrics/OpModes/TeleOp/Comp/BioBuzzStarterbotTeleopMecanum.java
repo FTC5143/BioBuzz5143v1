@@ -76,8 +76,8 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    public static int LAUNCHER_TARGET_VELOCITY = 1450; //2678 RPM
-    public static int LAUNCHER_MIN_VELOCITY = 1500; //2571 RPM
+    public static int LAUNCHER_TARGET_VELOCITY = 1500; // ~3214 RPM
+    public static int LAUNCHER_MIN_VELOCITY = 1400; // ~3000 RPM
 
 
     /*
@@ -188,6 +188,11 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      */
     @Override
     public void loop() {
+        telemetry.addData("FL:", leftFrontDrive.getCurrentPosition());
+        telemetry.addData("FR:", rightFrontDrive.getCurrentPosition());
+        telemetry.addData("BL:", leftBackDrive.getCurrentPosition());
+        telemetry.addData("BR:", rightBackDrive.getCurrentPosition());
+
         /*
          * Here we call a function called mecanumDrive. The mecanumDrive function takes the input from
          * the joysticks, and applies power to the drive motors to move the robot as requested
@@ -235,7 +240,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * Show motor powers on the Driver Station via telemetry.
          */
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
-        telemetry.addData("Triggers", "left (%.2f, right (%.2f)",gamepad1.left_trigger, gamepad1.right_trigger);
+        telemetry.addData("Triggers", "left (%.2f), right (%.2f)", gamepad1.left_trigger, gamepad1.right_trigger);
     }
 
     /*
@@ -294,7 +299,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          * inside the hopper.
          */
         if (gamepad1.right_bumper && launcher.getVelocity() > LAUNCHER_MIN_VELOCITY) {
-            windmillServo.setPower(-1);
+            windmillServo.setPower(-0.75);
             intakePower += 0.5;
         } else {
             windmillServo.setPower(0);

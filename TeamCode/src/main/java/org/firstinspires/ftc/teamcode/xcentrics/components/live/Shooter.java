@@ -70,7 +70,7 @@ public class Shooter extends Component {
                 }
                 break;
         }
-
+        gate.update();
     }
 
     @Override
@@ -84,6 +84,9 @@ public class Shooter extends Component {
 
     public void spinUp(){
         fly1 = 1;
+        if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
+            spinGate();
+        }
     }
 
     public void spinDown(){

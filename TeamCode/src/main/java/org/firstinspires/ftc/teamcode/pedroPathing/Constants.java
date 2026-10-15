@@ -15,5 +15,14 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Constants {
-
+    public static MecanumConfig driveConfig = new MecanumConfig(
+            config -> {
+                config.frontLeftName.set("FL");
+                config.frontRightName.set("FR");
+                config.backLeftName.set("BL");
+                config.backRightName.set("BR");
+                config.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+                config.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+            }
+    );
 }

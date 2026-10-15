@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.pedroPathing.Constants;
 import org.firstinspires.ftc.teamcode.xcentrics.components.live.Shooter;
+import org.firstinspires.ftc.teamcode.xcentrics.components.live.Wall;
 import org.firstinspires.ftc.teamcode.xcentrics.components.live.intake;
 
 
@@ -17,6 +18,7 @@ public class LiveRobot extends Robot{
     public Follower follower;
     public Shooter shooter;
     public intake intake;
+    public Wall wall;
 
     public static Pose lastPose = new Pose(0,0,Math.toRadians(0));
     {
@@ -28,6 +30,7 @@ public class LiveRobot extends Robot{
         follower    = null;
         intake = new intake(this);
         shooter = new Shooter(this);
+        wall = new Wall(this);
     }
 
 
