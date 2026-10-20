@@ -6,7 +6,8 @@ import com.pedropathing.tuning.autotune.Tuner;
 
 
 import org.firstinspires.ftc.teamcode.pedroPathing.procedures.MecanumTuner;
-import org.firstinspires.ftc.teamcode.pedroPathing.procedures.ThreeWheelTuner;
+import org.firstinspires.ftc.teamcode.pedroPathing.procedures.ThreeWheelIMUTuner;
+
 
 public class Tuning {
     // Tuners go here
@@ -15,8 +16,8 @@ public class Tuning {
         return new MecanumTuner();
     }
     @Tuner
-    public static Procedure threeWheelTuner() {
-        return new ThreeWheelTuner();
+    public static Procedure threeWheelIMUTuner() {
+        return new ThreeWheelIMUTuner();
     }
 
 }
