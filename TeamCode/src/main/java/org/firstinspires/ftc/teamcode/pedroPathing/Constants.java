@@ -1,6 +1,10 @@
 package org.firstinspires.ftc.teamcode.pedroPathing;
 
 
+import com.pedropathing.algorithm.ForesightConfig;
+import com.pedropathing.controllers.Controller;
+import com.pedropathing.math.Matrix;
+import com.pedropathing.math.Vector2D;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
 import com.pedropathing.revhub.localizers.RevHubIMU;
@@ -17,6 +21,10 @@ public class Constants {
                 config.backRightName.set("BR");
                 config.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
                 config.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
+                config.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
+                config.backRightDirection.set(DcMotorSimple.Direction.FORWARD);
+
+                config.manualBrakeMode.set(true);
             }
     );
     public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {

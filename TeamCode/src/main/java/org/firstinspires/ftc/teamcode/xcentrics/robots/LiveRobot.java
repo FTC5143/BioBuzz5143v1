@@ -27,7 +27,7 @@ public class LiveRobot extends Robot{
 
     public LiveRobot(LinearOpMode opMode) {
         super(opMode);
-        follower    = null;
+       // follower    = new Follower(Constants.localizerConfig, Constants.drivetrainConfig,);
         intake = new intake(this);
         shooter = new Shooter(this);
         wall = new Wall(this);

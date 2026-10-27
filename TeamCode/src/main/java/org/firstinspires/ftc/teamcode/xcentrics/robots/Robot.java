@@ -6,7 +6,10 @@ package org.firstinspires.ftc.teamcode.xcentrics.robots;
 //port static org.firstinspires.ftc.teamcode.xcentrics.components.live.Turret.flyError;
 
 
-import com.aaravdhawan25.pidautotuner.ftc.dashboard.AutoTuneTelemetry;
+import android.text.Spannable;
+
+import com.bylazar.telemetry.PanelsTelemetry;
+import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -63,7 +66,7 @@ public class Robot {
     
     Telemetry telemetry;
 
-    AutoTuneTelemetry autoTuneTelemetry;
+    TelemetryManager autoTuneTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
     protected long last_update = System.nanoTime();
     protected int update_freq = 0;
@@ -104,7 +107,6 @@ public class Robot {
 
         this.hwmap  = opmode.hardwareMap;
         registerHardware(this.hwmap);
-        autoTuneTelemetry = new AutoTuneTelemetry(this.hwmap,telemetry);
 
         this.telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE); // Begone jumpy telemetry
     }
@@ -164,7 +166,7 @@ public class Robot {
             }
 
             telemetry.update();
-            autoTuneTelemetry.update();
+
         }
 
         // Recalculate our update thread frequency
