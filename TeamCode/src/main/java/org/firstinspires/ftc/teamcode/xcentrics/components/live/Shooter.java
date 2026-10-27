@@ -18,9 +18,9 @@ import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
 @Configurable
 class LauncherConfig{
-    public static int TARGET_VELO = 1250;
+    public static int TARGET_VELO = 1300;
     public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);
-    public static int LAUNCHER_MIN_VELO = 1200;
+    public static int LAUNCHER_MIN_VELO = 1250;
 }
 public class Shooter extends Component {
 
@@ -61,15 +61,10 @@ public class Shooter extends Component {
                 fly.setVelocity(LauncherConfig.TARGET_VELO);
                 break;
         }
-        switch(gate1){
-            case 0:
-                gate.queue_power(0);
-                break;
-            case 1:
-                if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO) {
-                    gate.queue_power(1);
-                }
-                break;
+        if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
+            gate.queue_power(1);
+        } else {
+            gate.queue_power(0);
         }
         gate.update();
     }

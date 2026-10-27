@@ -23,22 +23,15 @@ package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Comp;
  */
 
 
-
 import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
 
-
-import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.telemetry.PanelsTelemetry;
-import com.bylazar.telemetry.TelemetryManager;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.MotorControlAlgorithm;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
-
 
 /*
  * This file includes a teleop (driver-controlled) file for the goBILDA® StarterBot with Mecanum
@@ -54,7 +47,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
  * Since the dynamics of a launcher wheel system varies greatly from those of most other FTC mechanisms,
  * we will also need to adjust the "PIDF" coefficients with some that are a better fit for our application.
  */
-@Configurable
+
 @TeleOp(name = "Mec BioBuzz StarterBot Teleop", group = "StarterBot")
 //@Disabled
 public class BioBuzzStarterbotTeleopMecanum extends OpMode {
@@ -81,9 +74,8 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      * in the launch() function to only run the windmill servo when the motor is spinning fast
      * enough to make a successful throw.
      */
-    public static int LAUNCHER_TARGET_VELOCITY = 1500; // ~3214 RPM
-    public static int LAUNCHER_MIN_VELOCITY = 1400; // ~3000 RPM
-    public static PIDFCoefficients PIDS = new PIDFCoefficients(0,0,0,0, MotorControlAlgorithm.PIDF);
+    public final int LAUNCHER_TARGET_VELOCITY = 1300; //2678 RPM
+    public final int LAUNCHER_MIN_VELOCITY = 1250; //2571 RPM
 
 
     /*
@@ -98,7 +90,6 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
 
     // Create a variable to set to the intake.
     double intakePower;
-    TelemetryManager panelsTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
 
     /*
      * Code to run ONCE when the driver hits INIT
@@ -143,6 +134,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         leftBackDrive.setZeroPowerBehavior(BRAKE);
         rightBackDrive.setZeroPowerBehavior(BRAKE);
         intake.setZeroPowerBehavior(BRAKE);
+        launcher.setZeroPowerBehavior(BRAKE);
 
         /*
          * Here we set our launcher to the RUN_USING_ENCODER runmode.
@@ -154,7 +146,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
 
         launcher.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,PIDS);
+        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, new PIDFCoefficients(40, 0, 0, 12.5));
 
         /*
          * set Feeders to an initial value to initialize the servo controller
@@ -173,7 +165,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         /*
          * Tell the driver that initialization is complete.
          */
-        panelsTelemetry.addData("speed: ", launcher.getVelocity());
+        telemetry.addData("Status", "Initialized");
     }
 
     /*
@@ -195,13 +187,6 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
      */
     @Override
     public void loop() {
-        launcher.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,PIDS);
-        telemetry.addData("FL:", leftFrontDrive.getCurrentPosition());
-        telemetry.addData("FR:", rightFrontDrive.getCurrentPosition());
-        telemetry.addData("BL:", leftBackDrive.getCurrentPosition());
-        telemetry.addData("BR:", rightBackDrive.getCurrentPosition());
-
-
         /*
          * Here we call a function called mecanumDrive. The mecanumDrive function takes the input from
          * the joysticks, and applies power to the drive motors to move the robot as requested
@@ -241,18 +226,12 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         intake.setPower(intakePower);
         leftIntakeServo.setPower(intakePower);
         rightIntakeServo.setPower(intakePower);
-        if(intakePower < 0){
-            windmillServo.setPower(intakePower);
-        }
 
         /*
          * Show motor powers on the Driver Station via telemetry.
          */
         telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftFrontPower, rightFrontPower);
-        telemetry.addData("Triggers", "left (%.2f), right (%.2f)", gamepad1.left_trigger, gamepad1.right_trigger);
-        panelsTelemetry.addData("speed",launcher.getVelocity());
-        telemetry.update();
-        panelsTelemetry.update();
+        telemetry.addData("Triggers", "left (%.2f, right (%.2f)",gamepad1.left_trigger, gamepad1.right_trigger);
     }
 
     /*
@@ -268,7 +247,7 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
         leftBackPower = forward - strafe + rotate;
         rightBackPower = forward + strafe - rotate;
 
-        double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+        double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower)) - 0.75;
         max = Math.max(max, Math.abs(leftBackPower));
         max = Math.max(max, Math.abs(rightBackPower));
 
@@ -299,7 +278,9 @@ public class BioBuzzStarterbotTeleopMecanum extends OpMode {
          */
         if (gamepad1.right_bumper) {
             launcher.setVelocity(LAUNCHER_TARGET_VELOCITY);
-        } else {
+        } else if(gamepad1.left_bumper){
+            launcher.setVelocity(-100);
+        } else{
             launcher.setVelocity(0);
         }
 
