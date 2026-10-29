@@ -52,15 +52,6 @@ public class Shooter extends Component {
     @Override
     public void update(LinearOpMode opmode) {
         super.update(opmode);
-        switch (fly1){
-            case 0:
-                fly.setPower(0);
-                break;
-            case 1:
-                fly.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,LauncherConfig.flyPidCoef);
-                fly.setVelocity(LauncherConfig.TARGET_VELO);
-                break;
-        }
         if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
             gate.queue_power(1);
         } else {
@@ -79,14 +70,14 @@ public class Shooter extends Component {
     }
 
     public void spinUp(){
-        fly1 = 1;
+        fly.setVelocity(LauncherConfig.TARGET_VELO);
         if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
             spinGate();
         }
     }
 
     public void spinDown(){
-        fly1 = 0;
+        fly.setVelocity(0);
     }
 
     public void spinGate(){

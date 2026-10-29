@@ -11,7 +11,7 @@ public class Paths1 {
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(55.4978, 9.0044, 90);
+    public final Pose start = poseFactory.of(55.4978, 9.0044, 90);
     private final Pose path1 = poseFactory.of(55.4955, 17.0411, -90);
     private final Pose point2Start = poseFactory.of(55.4955, 17.0411, -90);
     private final Pose point2 = poseFactory.of(55.4902, 17.0913, 90);

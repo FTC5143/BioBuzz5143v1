@@ -16,6 +16,7 @@ import org.firstinspires.ftc.teamcode.xcentrics.util.qus.ServoQUS;
 public class intake extends Component {
     private DcMotorQUS intake;
     private CRServoQUS inl, inr;
+    private ServoQUS flower;
 
 
     public intake(Robot robot) {
@@ -28,6 +29,7 @@ public class intake extends Component {
         intake = new DcMotorQUS(hwmap.get(DcMotorEx.class,"intake"));
         inl = new CRServoQUS(hwmap.get(CRServo.class,"lin"));
         inr = new CRServoQUS(hwmap.get(CRServo.class,"rin"));
+        flower = new ServoQUS(hwmap.get(Servo.class,"flower"));
 
     }
 
@@ -51,8 +53,8 @@ public class intake extends Component {
 
     private void setPower(double power){
         intake.queue_power(power);
-        inl.queue_power(-power);
-        inr.queue_power(power);
+        inl.queue_power(power);
+        inr.queue_power(-power);
     }
 
     public void intake(){
@@ -64,5 +66,12 @@ public class intake extends Component {
     }
     public void reverse(){
         setPower(-1);
+    }
+    public void lowerFlower(){
+        flower.queue_position(0.5);
+    }
+
+    public void raiseFlower(){
+        flower.queue_position(0);
     }
 }
