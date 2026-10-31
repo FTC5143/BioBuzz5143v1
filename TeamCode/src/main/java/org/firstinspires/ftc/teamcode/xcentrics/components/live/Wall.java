@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
+import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.DcMotorQUS;
 class WallConfig{
@@ -17,7 +18,7 @@ public class Wall extends Component {
     private DcMotorQUS wall;
     private Controller pid = Controller.pid(WallConfig.kP,WallConfig.kI,WallConfig.kD);
     private double error = 0;
-    public Wall(Robot robot) {
+    public Wall(LiveRobot robot) {
         super(robot);
     }
 

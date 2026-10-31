@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
+import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
 @Configurable
@@ -26,9 +27,11 @@ public class Shooter extends Component {
 
     private DcMotorEx fly;
     private CRServoQUS gate;
+    private LiveRobot robot;
     private int fly1 = 0,gate1 = 0;
-    public Shooter(Robot robot) {
+    public Shooter(LiveRobot robot) {
         super(robot);
+        this.robot = robot;
     }
 
     @Override
@@ -73,6 +76,7 @@ public class Shooter extends Component {
         fly.setVelocity(LauncherConfig.TARGET_VELO);
         if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
             spinGate();
+            robot.intake.intake();
         }
     }
 

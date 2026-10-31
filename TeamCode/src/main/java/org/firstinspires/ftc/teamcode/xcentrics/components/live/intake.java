@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
+import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.DcMotorQUS;
@@ -19,7 +20,7 @@ public class intake extends Component {
     private ServoQUS flower;
 
 
-    public intake(Robot robot) {
+    public intake(LiveRobot robot) {
         super(robot);
     }
 

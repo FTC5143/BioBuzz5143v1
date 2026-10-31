@@ -4,6 +4,8 @@ package org.firstinspires.ftc.teamcode.xcentrics.components;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
+import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -33,7 +35,7 @@ public abstract class Component {
     protected LinearOpMode opMode;
 
     
-    public Component(Robot robot) {
+    public Component(LiveRobot robot) {
         this.robot = robot;
         robot.registerComponent(this);
     }
