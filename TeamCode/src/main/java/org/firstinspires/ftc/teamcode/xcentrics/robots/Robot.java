@@ -194,6 +194,8 @@ public class Robot {
 
         addData("[RBT "+name+"]", components.size()+" components");
         addData("FREQ", update_freq);
+        telemetry.update();
+        autoTuneTelemetry.update();
     }
     public void addData(String caption, Object value){
         telemetry.addData(caption,value);

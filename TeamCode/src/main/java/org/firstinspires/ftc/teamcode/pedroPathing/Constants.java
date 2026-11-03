@@ -11,8 +11,10 @@ import com.pedropathing.revhub.drivetrains.Mecanum;
 import com.pedropathing.revhub.drivetrains.MecanumConfig;
 import com.pedropathing.revhub.localizers.Encoder;
 import com.pedropathing.revhub.localizers.RevHubIMU;
+import com.pedropathing.revhub.localizers.ThreeWheelConfig;
 import com.pedropathing.revhub.localizers.ThreeWheelIMUConfig;
 import com.pedropathing.revhub.localizers.ThreeWheelIMULocalizer;
+import com.pedropathing.revhub.localizers.ThreeWheelLocalizer;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -38,15 +40,16 @@ public class Constants {
         c.strafeEncoderName.set("BR");
         c.imuName.set("imu");
         c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
+                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         )));
-        c.leftPodY.set(7.095924688912749);
-        c.rightPodY.set(-8.455540747150192);
-        c.strafePodX.set(-6.774370967629784);
-        c.forwardTicksToInches.set(0.0019575434556651557);
-        c.strafeTicksToInches.set(0.001981550809255165);
-        c.turnTicksToRadians.set(0.0019365162934119827);
+
+        c.leftPodY.set(7.8679825627517);
+        c.rightPodY.set(-8.596102200074526);
+        c.strafePodX.set(-7.0838955168453);
+        c.forwardTicksToInches.set(0.0019573536701847456);
+        c.strafeTicksToInches.set(0.0019753046721908427);
+        c.turnTicksToRadians.set(0.0019305918124591602);
         c.leftEncoderDirection.set(Encoder.FORWARD);
         c.rightEncoderDirection.set(Encoder.FORWARD);
         c.strafeEncoderDirection.set(Encoder.REVERSE);

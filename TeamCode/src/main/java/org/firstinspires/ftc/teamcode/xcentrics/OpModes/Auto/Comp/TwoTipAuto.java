@@ -15,7 +15,7 @@ public class TwoTipAuto extends LiveAutoBase {
 
     @Override
     public void on_init() {
-        robot.follower.setPose(paths.start);
+        robot.follower.setPose(new Pose(55.4978, 9.0044, Math.toRadians(-90)));
     }
 
     @Override
@@ -57,13 +57,6 @@ public class TwoTipAuto extends LiveAutoBase {
                     break;
                 }
             case 3:
-                if(!robot.follower.isBusy()) {
-                    followPath(paths.path3());
-                    autoState++;
-                    break;
-                }
-
-            case 4:
                 if(!robot.follower.isBusy()){
                     robot.shooter.spinUp();
                     robot.halt(5);
@@ -72,11 +65,19 @@ public class TwoTipAuto extends LiveAutoBase {
                     break;
                 }
 
+            case 4:
+                if(!robot.follower.isBusy()) {
+                    followPath(paths.flowerready());
+                    autoState++;
+                    break;
+                }
+
             case 5:
                 if(!robot.follower.isBusy()){
-                    followPath(paths.path4());
                     robot.intake.intake();
                     robot.intake.lowerFlower();
+                    robot.halt(1);
+                    followPath(paths.path4());
                     robot.halt(3);
                     autoState++;
                     break;
@@ -111,6 +112,10 @@ public class TwoTipAuto extends LiveAutoBase {
         }
         robot.addData("Auto State: ",autoState);
         robot.addData("Robot Pose: ",robot.getRobotPose());
+        robot.addData("Follower Headding: ",Math.toDegrees(robot.follower.pose().heading()));
+        robot.addData("Follower Pose: ",robot.follower.pose());
+        robot.addData("path:",robot.follower.currentPath() != null ? robot.follower.currentPath() : "null");
+        robot.updateTelemetry();
 
     }
 }
