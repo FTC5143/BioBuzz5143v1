@@ -45,6 +45,7 @@ public class intake extends Component {
         intake.update();
         inl.update();
         inr.update();
+        flower.update();
     }
 
     @Override
@@ -69,10 +70,10 @@ public class intake extends Component {
         setPower(-1);
     }
     public void lowerFlower(){
-        flower.queue_position(0.5);
+        flower.queue_position(0);
     }
 
     public void raiseFlower(){
-        flower.queue_position(0);
+        flower.queue_position(1);
     }
 }

@@ -52,6 +52,7 @@ public class TwoTipAuto extends LiveAutoBase {
 
             case 2:
                 if(!robot.follower.isBusy()){
+                    robot.halt(1.5);
                     followPath(paths.path2());
                     autoState++;
                     break;
@@ -59,7 +60,7 @@ public class TwoTipAuto extends LiveAutoBase {
             case 3:
                 if(!robot.follower.isBusy()){
                     robot.shooter.spinUp();
-                    robot.halt(5);
+                    robot.halt(4);
                     robot.shooter.spinDown();
                     autoState++;
                     break;
@@ -93,7 +94,7 @@ public class TwoTipAuto extends LiveAutoBase {
             case 7:
                 if(!robot.follower.isBusy()){
                     robot.shooter.spinUp();
-                    robot.halt(5);
+                    robot.halt(4);
                     robot.shooter.spinDown();
                     autoState++;
                     break;
