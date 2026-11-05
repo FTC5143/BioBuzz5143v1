@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.xcentrics.components.live;
 
 
 
+import com.aaravdhawan25.pidautotuner.PIDFController;
 import com.bylazar.configurables.annotations.Configurable;
 import com.pedropathing.tuning.autotune.Tuner;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -17,18 +18,24 @@ import org.firstinspires.ftc.teamcode.xcentrics.components.Component;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.LiveRobot;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
+import org.firstinspires.ftc.teamcode.xcentrics.util.qus.DcMotorQUS;
+
 @Configurable
 class LauncherConfig{
     public static int TARGET_VELO = 1250;
-    public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);
-    public static int LAUNCHER_MIN_VELO = 1200;
+   // public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);
+    public static int LAUNCHER_MIN_VELO = 1235;
+    public static double p,i,d,f;
 }
+@Configurable
 public class Shooter extends Component {
 
-    private DcMotorEx fly;
+    public DcMotorQUS fly;
+    private PIDFController flyController = new PIDFController(0.00735,0.04750,0.00076,0.000397);
     private CRServoQUS gate;
     private LiveRobot robot;
-    private int fly1 = 0,gate1 = 0;
+    public static double TARGET_SPEED = 0,gate1 = 0;
+    public static double speed = 3000;
     public Shooter(LiveRobot robot) {
         super(robot);
         this.robot = robot;
@@ -37,7 +44,7 @@ public class Shooter extends Component {
     @Override
     public void registerHardware(HardwareMap hwmap) {
         super.registerHardware(hwmap);
-        fly = (hwmap.get(DcMotorEx.class,"fly"));
+        fly = new DcMotorQUS(hwmap.get(DcMotorEx.class,"fly"));
         gate = new CRServoQUS(hwmap.get(CRServo.class,"gate"));
     }
 
@@ -45,9 +52,9 @@ public class Shooter extends Component {
     public void startup() {
         super.startup();
 
-        fly.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        fly.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        fly.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,LauncherConfig.flyPidCoef);
+        fly.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+       // fly.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //fly.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER,LauncherConfig.flyPidCoef);
 
 
     }
@@ -55,12 +62,14 @@ public class Shooter extends Component {
     @Override
     public void update(LinearOpMode opmode) {
         super.update(opmode);
-        if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
+        if(Math.abs(toRPM(fly.motor.getVelocity()) - TARGET_SPEED) < 50 && TARGET_SPEED != 0){
             gate.queue_power(1);
         } else {
             gate.queue_power(0);
         }
+        setShooterPID(TARGET_SPEED);
         gate.update();
+        fly.update();
     }
 
     @Override
@@ -72,21 +81,31 @@ public class Shooter extends Component {
 
     }
 
-    public void spinUp(){
-        fly.setVelocity(LauncherConfig.TARGET_VELO);
-        if(fly.getVelocity() > LauncherConfig.LAUNCHER_MIN_VELO){
-            spinGate();
-            robot.intake.intake();
+    private double toRPM(double tps){
+        return tps * 60.0 / 28.0;
+    }
+    public void setShooterPID(double rpm){
+        double velocity = Math.abs(fly.motor.getVelocity());
+        double currentRPM = toRPM(velocity);
+        flyController.setOutputBounds(0.0,1);
+
+        double power = flyController.calculate(currentRPM,rpm);
+        if(rpm == 0){
+            power = 0;
         }
+        fly.queue_power(power);
     }
 
+    public void spinUp(){
+        TARGET_SPEED = speed;
+    }
     public void spinDown(){
-        fly.setVelocity(0);
-    }
-    public void out(){
-        fly.setVelocity(-500);
+        TARGET_SPEED = 0;
     }
 
+    public void out(){
+        TARGET_SPEED = -100;
+    }
     public void spinGate(){
         gate1 = 1;
     }
@@ -94,4 +113,5 @@ public class Shooter extends Component {
     public void stopGate(){
         gate1 = 0;
     }
+
 }

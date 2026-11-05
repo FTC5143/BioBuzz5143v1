@@ -50,7 +50,7 @@ public class TuningConfig {
      * to avoid hitting hard stops; 0.5–0.7 is typical for flywheels.
      * Increase if the mechanism fails to oscillate.
      */
-    public static double RELAY_AMPLITUDE = 0.5;
+    public static double RELAY_AMPLITUDE = 0.7;
 
     /** Number of full oscillation cycles to average for Ku and Tu. */
     public static int CYCLES_TO_COLLECT = 6;
@@ -91,7 +91,7 @@ public class TuningConfig {
      * Converted to ticks/sec internally using TICKS_PER_REV:
      *   ticks/sec = (TARGET_RPM * TICKS_PER_REV) / 60.0
      */
-    public static double TARGET_RPM = 1250;
+    public static double TARGET_RPM = 2700;
 
     /**
      * Relay deadband for the velocity tuner in RPM.
@@ -100,7 +100,7 @@ public class TuningConfig {
     public static double VELOCITY_HYSTERESIS_RPM = 30;
 
     /** Power levels for the feedforward (kF) characterisation sweep. */
-    public static double[] FEEDFORWARD_TEST_POWERS = {0.5, 0.75, 1.0};
+    public static double[] FEEDFORWARD_TEST_POWERS = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1};
 
     /** Time in seconds to hold each feedforward power level before sampling. */
     public static double FEEDFORWARD_SETTLE_TIME_S = 1.5;
@@ -110,7 +110,7 @@ public class TuningConfig {
      * flywheels where kF handles steady-state error and integral causes windup).
      * True = full PID rule family including integral terms.
      */
-    public static boolean TUNE_INTEGRAL_TERM = false;
+    public static boolean TUNE_INTEGRAL_TERM = true;
 
     // ---- Helpers --------------------------------------------------------
 

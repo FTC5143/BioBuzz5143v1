@@ -86,6 +86,7 @@ public class TwoTipAuto extends LiveAutoBase {
 
             case 6:
                 if(!robot.follower.isBusy()){
+                    robot.intake.raiseFlower();
                     followPath(paths.path5());
                     autoState++;
                     break;

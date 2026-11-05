@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Comp;
 
 
+import com.bylazar.configurables.annotations.Configurable;
 import com.bylazar.field.FieldManager;
 import com.bylazar.field.PanelsField;
 import com.bylazar.field.Style;
@@ -15,7 +16,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.LiveTeleopBase;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 
-
+@Configurable
 @TeleOp(name = "TeleOp")
 public class TeleopLive extends LiveTeleopBase {
     private DrivePowers drivePowers;
@@ -28,6 +29,7 @@ public class TeleopLive extends LiveTeleopBase {
     private double lastTime = 0.0;
     private double progressT = 0.0;
     private final double pathDurationSec = 8.0;
+    public static double p = 0.25;
     @Override
     public void on_init() {
         robot.follower.setPose(robot.getRobotPose());
@@ -89,14 +91,14 @@ public class TeleopLive extends LiveTeleopBase {
             if(robot.follower.pose().y() <= 70){
                 lockedPowers = ManualDrive.headingLock(
                         robot.follower,
-                        new PIDController(0.5,0,0),
+                        new PIDController(p,0,0),
                         drivePowers,
                         Math.toRadians(270)
                 );
             } else {
                 lockedPowers = ManualDrive.headingLock(
                         robot.follower,
-                        new PIDController(0.5,0,0),
+                        new PIDController(p,0,0),
 
                         drivePowers,
                         Math.toRadians(90)
@@ -142,6 +144,7 @@ public class TeleopLive extends LiveTeleopBase {
         robot.addData("Follower Headding: ",Math.toDegrees(robot.follower.pose().heading()));
         robot.addData("Follower Pose: ",robot.follower.pose());
         robot.addData("path:",robot.follower.currentPath() != null ? robot.follower.currentPath() : "null");
+        robot.addData("fly speed: ",robot.shooter.fly.motor.getVelocity());
         robot.updateTelemetry();
     }
 }
