@@ -22,6 +22,6 @@ dependencies {
     implementation 'dev.ftcautotune.FtcAutoTune:pidautotuner-core:v1.4.3'
     implementation 'dev.ftcautotune.FtcAutoTune:pidautotuner-ftc:v1.4.3'
     // FTC-AutoTune — relay-feedback PID/PIDF auto tuner
-    implementation 'com.bylazar:fullpanels:1.0.12'
+    implementation 'com.bylazar:fullpanels:1.0.19'
     implementation "com.bylazar:field:1.0.10"
 }

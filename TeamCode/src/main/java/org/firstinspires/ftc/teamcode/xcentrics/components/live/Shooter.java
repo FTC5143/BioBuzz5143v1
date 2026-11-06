@@ -25,17 +25,17 @@ class LauncherConfig{
     public static int TARGET_VELO = 1250;
    // public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);
     public static int LAUNCHER_MIN_VELO = 1235;
-    public static double p,i,d,f;
+    public static double p = 0.2451,i = 0.03308,d = 0.00034,f = 0;
 }
 @Configurable
 public class Shooter extends Component {
 
     public DcMotorQUS fly;
-    private PIDFController flyController = new PIDFController(0.00735,0.04750,0.00076,0.000397);
+    private PIDFController flyController = new PIDFController(0.2451,0.03308,0.00034,0);
     private CRServoQUS gate;
     private LiveRobot robot;
     public static double TARGET_SPEED = 0,gate1 = 0;
-    public static double speed = 3000;
+    public static double speed = 2700;
     public Shooter(LiveRobot robot) {
         super(robot);
         this.robot = robot;
@@ -74,6 +74,7 @@ public class Shooter extends Component {
 
     @Override
     public void updateTelemetry(Telemetry telemetry) {
+        robot.addData("fly target:", LauncherConfig.TARGET_VELO);
         super.updateTelemetry(telemetry);
     }
 
@@ -85,6 +86,7 @@ public class Shooter extends Component {
         return tps * 60.0 / 28.0;
     }
     public void setShooterPID(double rpm){
+        flyController = new PIDFController(LauncherConfig.p,LauncherConfig.i,LauncherConfig.d,LauncherConfig.f);
         double velocity = Math.abs(fly.motor.getVelocity());
         double currentRPM = toRPM(velocity);
         flyController.setOutputBounds(0.0,1);

@@ -131,7 +131,7 @@ public class TeleopLive extends LiveTeleopBase {
         } else if (gamepad1.left_trigger > 0.1) {
             robot.intake.reverse();
         } else {
-            robot.intake.stopIntake();
+           // robot.intake.stopIntake();
         }
         if(gamepad2.dpad_down || gamepad1.dpad_down){
             robot.intake.lowerFlower();
