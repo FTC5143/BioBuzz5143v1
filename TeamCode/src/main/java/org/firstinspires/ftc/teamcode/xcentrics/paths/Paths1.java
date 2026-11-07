@@ -11,13 +11,13 @@ public class Paths1 {
 
     private final PoseFactory poseFactory = PoseFactory.degrees();
 
-    private final Pose start = poseFactory.of(56, 8, 90);
-    private final Pose path1 = poseFactory.of(8.9915, 11.9666, -90);
+    private final Pose start = poseFactory.of(56, 8, 270);
+    private final Pose path1 = poseFactory.of(8.9915, 11.9666, 270);
     private final Pose path1Control1 = poseFactory.of(26.6988, 25.2602, 0);
-    private final Pose point2Start = poseFactory.of(8.9915, 11.9666, -90);
+    private final Pose point2Start = poseFactory.of(8.9915, 11.9666, 270);
     private final Pose point2 = poseFactory.of(59.6951, 131.5574, 90);
-    private final Pose point2Control1 = poseFactory.of(33.1331, 83.1535, 0);
-    private final Pose point2Control2 = poseFactory.of(30.3276, 96.1262, 0);
+    private final Pose point2Control1 = poseFactory.of(32.85, 105.74, 0);
+    private final Pose point2Control2 = poseFactory.of(29.26, 107.81, 0);
     private final Pose flowerready = poseFactory.of(46.6934, 118.1541, 90);
     private final Pose flowerreadyControl1 = poseFactory.of(52.8945, 104.9858, 0);
     private final Pose point4 = poseFactory.of(46.3031, 128.3569, 90);

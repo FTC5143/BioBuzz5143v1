@@ -35,12 +35,12 @@ public class Constants {
             }
     );
     public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
-        c.leftEncoderName.set("BL");
-        c.rightEncoderName.set("FR");
+        c.leftEncoderName.set("FR");
+        c.rightEncoderName.set("BL");
         c.strafeEncoderName.set("BR");
         c.imuName.set("imu");
         c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         )));
 
