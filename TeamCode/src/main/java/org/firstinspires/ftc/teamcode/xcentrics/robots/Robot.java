@@ -8,8 +8,8 @@ package org.firstinspires.ftc.teamcode.xcentrics.robots;
 
 import android.text.Spannable;
 
-import com.bylazar.telemetry.PanelsTelemetry;
-import com.bylazar.telemetry.TelemetryManager;
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -30,13 +30,13 @@ class RobotConfig {
 
     public static int BULK_READ_1_CYCLE = 1;
     // Interval in cycles at which we bulk read from Rev Hub 2
-    
+
     public static int BULK_READ_2_CYCLE = 5;
     // Interval in cycles at which we send telemetry to the phone
-    
+
     public static int TELEMETRY_CYCLE = 40;
     // Interval in cycles at which we calculate cycle frequency
-    
+
     public static int FREQ_CHECK_CYCLE = 40;
     //what aliance we are on
 }
@@ -44,29 +44,29 @@ class RobotConfig {
 
 public class Robot {
 
-    
+
     HardwareMap hwmap;
-    
+
     public LinearOpMode opmode;
     public static boolean isRed = true;
     public static boolean isAuto = true;
     public boolean b1 = false;
 
-    
+
     ArrayList<Component> components = new ArrayList<>();
 
     public String name;
 
-    
+
     public ArrayList<String> warnings = new ArrayList<>();
 
-    
+
     boolean running = false;
 
-    
+
     Telemetry telemetry;
 
-    TelemetryManager autoTuneTelemetry = PanelsTelemetry.INSTANCE.getTelemetry();
+    TelemetryPacket packet = new TelemetryPacket();
 
     protected long last_update = System.nanoTime();
     protected int update_freq = 0;
@@ -76,17 +76,17 @@ public class Robot {
     Runnable update_thread;
 
     List<LynxModule> expansion_hubs;
-    
+    FtcDashboard dashboard = FtcDashboard.getInstance();
 
 
     // The Update Thread
     // Should be called as fast as possible. Does all reads and writes to the rev hub
     class UpdateThread implements Runnable{
 
-        
+
         Robot robot;
 
-        
+
         public UpdateThread(Robot robot) {
             super();
             this.robot = robot;
@@ -100,7 +100,7 @@ public class Robot {
         }
     }
 
-    
+
     public Robot(LinearOpMode opmode) { // FIRST THIS IS *YOUR* FAULT IT HAS TO BE THIS WAY AND I HATE IT AND YOU SHOULD BE ASHAMED
         this.opmode = opmode;
         this.telemetry = this.opmode.telemetry;
@@ -111,7 +111,7 @@ public class Robot {
         this.telemetry.setDisplayFormat(Telemetry.DisplayFormat.MONOSPACE); // Begone jumpy telemetry
     }
 
-    
+
     public void startup() {
         running = true;
 
@@ -195,11 +195,11 @@ public class Robot {
         addData("[RBT "+name+"]", components.size()+" components");
         addData("FREQ", update_freq);
         telemetry.update();
-        autoTuneTelemetry.update();
+        dashboard.sendTelemetryPacket(packet);
     }
     public void addData(String caption, Object value){
         telemetry.addData(caption,value);
-        autoTuneTelemetry.addData(caption,value);
+        packet.put(caption,value);
     }
 
     public void registerComponent(Component component) {
@@ -218,7 +218,7 @@ public class Robot {
         expansion_hubs = hwmap.getAll(LynxModule.class);
     }
 
-    
+
     public void addWarning(String warning) {
         /**
          * Add a warning to be displayed on the phone for when something is amiss and the robot should not be run

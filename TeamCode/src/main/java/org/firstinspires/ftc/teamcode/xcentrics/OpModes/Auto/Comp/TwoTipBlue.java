@@ -1,18 +1,16 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.Comp;
 
-import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.LiveAutoBase;
 import org.firstinspires.ftc.teamcode.xcentrics.paths.BlueAutoPaths;
-import org.firstinspires.ftc.teamcode.xcentrics.paths.Paths1;
 @Autonomous(name = "Blue Two Tip Auto")
 public class TwoTipBlue extends LiveAutoBase {
     private static int autoState = 0;
     private BlueAutoPaths paths = new BlueAutoPaths();
     @Override
     public void on_init() {
-        robot.follower.setPose(new Pose(55.4978, 9.0044, Math.toRadians(-90)));
+        robot.follower.setPose(paths.start);
         autoState = 0;
     }
 

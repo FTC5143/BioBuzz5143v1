@@ -3,10 +3,7 @@ package org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.Comp;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.bylazar.field.PanelsField;
-import com.pedropathing.api.PoseFactory;
 import com.pedropathing.math.Pose;
-import com.pedropathing.paths.Path;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.LiveAutoBase;
@@ -137,7 +134,7 @@ public class TwoTipAuto extends LiveAutoBase {
      */
     private void drawRobotToDashboard() {
         TelemetryPacket packet = new TelemetryPacket();
-        Canvas fieldOverlay = packet.fieldOverlay();
+        Canvas fieldOverlay = packet.fieldOverlay().drawImage("C:\\Users\\robotics5143_crxcs\\StudioProjects\\BioBuzz5143v1\\TeamCode\\src\\main\\java\\org\\firstinspires\\ftc\\teamcode\\xcentrics\\OpModes\\TeleOp\\Comp\\biobuzz-custom-field-images-meepmeep-compatible-printer-v0-834lq6c925ph1.png",0,0,144,144);
 
         Pose currentPose = robot.follower.pose();
         double robotRadius = 9.0; // Assuming a 18x18 inch robot (9 inch radius)

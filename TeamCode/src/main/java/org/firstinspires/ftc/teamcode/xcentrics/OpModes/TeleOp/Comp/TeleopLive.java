@@ -1,10 +1,7 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.Comp;
 
 
-import com.bylazar.configurables.annotations.Configurable;
-import com.bylazar.field.FieldManager;
-import com.bylazar.field.PanelsField;
-import com.bylazar.field.Style;
+import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.controllers.PIDController;
 import com.pedropathing.drivetrain.DrivePowers;
 import com.pedropathing.follower.ManualDrive;
@@ -16,11 +13,10 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.TeleOp.LiveTeleopBase;
 import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 
-@Configurable
+@Config
 @TeleOp(name = "TeleOp")
 public class TeleopLive extends LiveTeleopBase {
     private DrivePowers drivePowers;
-    private FieldManager fieldManager  = PanelsField.INSTANCE.getField();
     // Simulated robot position state
     private double robotX = -60.0;
     private double robotY = -60.0;

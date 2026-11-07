@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.xcentrics.components.live;
 
 
 import com.aaravdhawan25.pidautotuner.PIDFController;
-import com.bylazar.configurables.annotations.Configurable;
+import com.acmerobotics.dashboard.config.Config;
 import com.pedropathing.tuning.autotune.Tuner;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -20,14 +20,14 @@ import org.firstinspires.ftc.teamcode.xcentrics.robots.Robot;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.CRServoQUS;
 import org.firstinspires.ftc.teamcode.xcentrics.util.qus.DcMotorQUS;
 
-@Configurable
+@Config
 class LauncherConfig{
     public static int TARGET_VELO = 1250;
    // public static PIDFCoefficients flyPidCoef = new PIDFCoefficients(40,0,0,12.5);
     public static int LAUNCHER_MIN_VELO = 1235;
     public static double p = 0.2451,i = 0.03308,d = 0.00034,f = 0;
 }
-@Configurable
+@Config
 public class Shooter extends Component {
 
     public DcMotorQUS fly;
