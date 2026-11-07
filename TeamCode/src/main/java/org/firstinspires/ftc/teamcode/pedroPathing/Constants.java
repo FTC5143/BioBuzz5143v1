@@ -15,6 +15,8 @@ import com.pedropathing.revhub.localizers.ThreeWheelConfig;
 import com.pedropathing.revhub.localizers.ThreeWheelIMUConfig;
 import com.pedropathing.revhub.localizers.ThreeWheelIMULocalizer;
 import com.pedropathing.revhub.localizers.ThreeWheelLocalizer;
+import com.pedropathing.revhub.localizers.TwoWheelConfig;
+import com.pedropathing.revhub.localizers.TwoWheelLocalizer;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -26,6 +28,8 @@ public class Constants {
                 config.frontRightName.set("FR");
                 config.backLeftName.set("BL");
                 config.backRightName.set("BR");
+
+
                 config.frontLeftDirection.set(DcMotorSimple.Direction.REVERSE);
                 config.backLeftDirection.set(DcMotorSimple.Direction.REVERSE);
                 config.frontRightDirection.set(DcMotorSimple.Direction.FORWARD);
@@ -34,25 +38,20 @@ public class Constants {
                 config.manualBrakeMode.set(true);
             }
     );
-    public static ThreeWheelIMUConfig localizerConfig = new ThreeWheelIMUConfig(c -> {
-        c.leftEncoderName.set("FR");
-        c.rightEncoderName.set("BL");
-        c.strafeEncoderName.set("BR");
+    public static TwoWheelConfig localizerConfig = new TwoWheelConfig(c -> {
+        c.xPodName.set("BL");
+        c.yPodName.set("BR");
         c.imuName.set("imu");
+        c.xPodOffset.set(-7.0);
+        c.yPodOffset.set(8.0);
+        c.forwardTicksToInches.set(0.0019573536701847456);
+        c.strafeTicksToInches.set(0.0019305918124591602);
+        c.xPodDirection.set(Encoder.FORWARD);
+        c.yPodDirection.set(Encoder.REVERSE);
         c.imu.set(new RevHubIMU(new RevHubOrientationOnRobot(
                 RevHubOrientationOnRobot.LogoFacingDirection.LEFT,
                 RevHubOrientationOnRobot.UsbFacingDirection.UP
         )));
-
-        c.leftPodY.set(7.8679825627517);
-        c.rightPodY.set(-8.596102200074526);
-        c.strafePodX.set(-7.0838955168453);
-        c.forwardTicksToInches.set(0.0019573536701847456);
-        c.strafeTicksToInches.set(0.0019753046721908427);
-        c.turnTicksToRadians.set(0.0019305918124591602);
-        c.leftEncoderDirection.set(Encoder.FORWARD);
-        c.rightEncoderDirection.set(Encoder.FORWARD);
-        c.strafeEncoderDirection.set(Encoder.REVERSE);
     });
     public static ForesightConfig foresightConfig = new ForesightConfig(
             c -> {
@@ -82,7 +81,7 @@ public class Constants {
 
     public static Follower create(HardwareMap h) {
         return new Follower(
-                new ThreeWheelIMULocalizer(h, localizerConfig),
+                new TwoWheelLocalizer(h, localizerConfig),
                 new Mecanum(h, drivetrainConfig),
                 new Foresight(foresightConfig)
         );

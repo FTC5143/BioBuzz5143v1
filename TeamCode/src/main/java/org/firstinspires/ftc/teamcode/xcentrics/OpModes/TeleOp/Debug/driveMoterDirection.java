@@ -44,6 +44,10 @@ public class driveMoterDirection extends OpMode {
         } else {
             BR.setPower(0);
         }
-
+        telemetry.addData("BR:,",BR.getCurrentPosition());
+        telemetry.addData("BL:,",BL.getCurrentPosition());
+        telemetry.addData("FL:,",FL.getCurrentPosition());
+        telemetry.addData("FR:,",FR.getCurrentPosition());
+        telemetry.update();
     }
 }
