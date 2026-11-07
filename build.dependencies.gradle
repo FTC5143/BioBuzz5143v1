@@ -4,6 +4,7 @@ repositories {
     google() // Needed for androidx
     maven { url = "https://mymaven.bylazar.com/releases" }
     maven { url = 'https://jitpack.io' }
+    maven { url = 'https://maven.brott.dev/' }
 }
 
 dependencies {
@@ -24,4 +25,5 @@ dependencies {
     // FTC-AutoTune — relay-feedback PID/PIDF auto tuner
     implementation 'com.bylazar:fullpanels:1.0.19'
     implementation "com.bylazar:field:1.0.10"
+    implementation 'com.acmerobotics.dashboard:dashboard:0.6.0'
 }

@@ -13,6 +13,7 @@ public class TwoTipBlue extends LiveAutoBase {
     @Override
     public void on_init() {
         robot.follower.setPose(new Pose(55.4978, 9.0044, Math.toRadians(-90)));
+        autoState = 0;
     }
 
     @Override

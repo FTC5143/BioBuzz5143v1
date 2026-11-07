@@ -87,7 +87,7 @@ public class Shooter extends Component {
     }
     public void setShooterPID(double rpm){
         flyController = new PIDFController(LauncherConfig.p,LauncherConfig.i,LauncherConfig.d,LauncherConfig.f);
-        double velocity = Math.abs(fly.motor.getVelocity());
+        double velocity = fly.motor.getVelocity();
         double currentRPM = toRPM(velocity);
         flyController.setOutputBounds(0.0,1);
 

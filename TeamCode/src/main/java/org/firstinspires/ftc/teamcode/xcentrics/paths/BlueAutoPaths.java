@@ -9,22 +9,22 @@ import com.pedropathing.paths.Path;
 
 public class BlueAutoPaths {
 
-    private  PoseFactory poseFactory = PoseFactory.degrees();
-    private final Pose start = poseFactory.of(56, 8, 90);
-    private final Pose path1 = poseFactory.of(8.9915, 11.9666, -90);
-    private final Pose path1Control1 = poseFactory.of(26.6988, 25.2602, 0);
-    private final Pose point2Start = poseFactory.of(8.9915, 11.9666, -90);
-    private final Pose point2 = poseFactory.of(59.6951, 135.5574, 90);
-    private final Pose point2Control1 = poseFactory.of(33.1331, 83.1535, 0);
-    private final Pose point2Control2 = poseFactory.of(30.3276, 96.1262, 0);
-    private final Pose flowerready = poseFactory.of(46.6934, 118.1541, 90);
-    private final Pose flowerreadyControl1 = poseFactory.of(52.8945, 104.9858, 0);
-    private final Pose point4 = poseFactory.of(46.3031, 123.3569, 90);
-    private final Pose point5 = poseFactory.of(59.84, 132.0084, 90);
-    private final Pose point5Control1 = poseFactory.of(51.9807, 102.6102, 0);
-    private final Pose point6Start = poseFactory.of(59.84, 132.0084, 90);
-    private final Pose point6 = poseFactory.of(10.1755, 122.1578, 0);
-    private final Pose point6Control1 = poseFactory.of(59.2587, 110.7255, 0);
+    public static  PoseFactory poseFactory = PoseFactory.degrees();
+    public static Pose start = poseFactory.of(56, 8, -90);
+    public static  Pose path1 = poseFactory.of(8.9915, 11.9666, -90);
+    public static  Pose path1Control1 = poseFactory.of(26.6988, 25.2602, 0);
+    public static  Pose point2Start = poseFactory.of(8.9915, 11.9666, -90);
+    public static  Pose point2 = poseFactory.of(59.6951, 135.5574, 90);
+    public static  Pose point2Control1 = poseFactory.of(33.1331, 83.1535, 0);
+    public static  Pose point2Control2 = poseFactory.of(30.3276, 96.1262, 0);
+    public static  Pose flowerready = poseFactory.of(46.6934, 118.1541, 90);
+    public static  Pose flowerreadyControl1 = poseFactory.of(52.8945, 104.9858, 0);
+    public static  Pose point4 = poseFactory.of(46.3031, 123.3569, 90);
+    public static  Pose point5 = poseFactory.of(59.84, 132.0084, 90);
+    public static  Pose point5Control1 = poseFactory.of(51.9807, 102.6102, 0);
+    public static  Pose point6Start = poseFactory.of(59.84, 132.0084, 90);
+    public static  Pose point6 = poseFactory.of(10.1755, 122.1578, 0);
+    public static  Pose point6Control1 = poseFactory.of(59.2587, 110.7255, 0);
     public BlueAutoPaths(){
         poseFactory = poseFactory.mirrorX(70.75);
     }
