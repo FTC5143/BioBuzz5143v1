@@ -74,6 +74,6 @@ public class intake extends Component {
     }
 
     public void raiseFlower(){
-        flower.queue_position(1);
+        flower.queue_position(0.6);
     }
 }

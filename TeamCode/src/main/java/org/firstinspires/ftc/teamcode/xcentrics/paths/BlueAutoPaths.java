@@ -7,7 +7,8 @@ import com.pedropathing.paths.Path;
 
 public class BlueAutoPaths {
 
-    public final PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75);
+    public static PoseFactory poseFactory = PoseFactory.degrees().mirrorX(70.75).mirrorY(70.75);
+
     public final Pose start = poseFactory.of(55.4978, 9.0044, -90);
     public final Pose path1 = poseFactory.of(8.9915, 11.9666, -90);
     public final Pose path1Control1 = poseFactory.of(26.6988, 25.2602, 0);

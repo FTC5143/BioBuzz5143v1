@@ -51,6 +51,7 @@ public class TwoTipAuto extends LiveAutoBase {
                     robot.shooter.spinDown();
                     robot.intake.intake();
                     followPath(paths.path1());
+                    robot.shooter.spinDown();
                     autoState++;
                     break;
                 }
@@ -80,12 +81,14 @@ public class TwoTipAuto extends LiveAutoBase {
 
             case 5:
                 if(!robot.follower.isBusy()){
-                    robot.intake.intake();
                     robot.intake.lowerFlower();
+                    robot.intake.intake();
                     robot.halt(1);
                     followPath(paths.path4());
                     robot.halt(3);
+                    robot.intake.raiseFlower();
                     autoState++;
+                    robot.intake.raiseFlower();
                     break;
                 }
 
@@ -93,7 +96,9 @@ public class TwoTipAuto extends LiveAutoBase {
                 if(!robot.follower.isBusy()){
                     robot.intake.raiseFlower();
                     followPath(paths.path5());
+                    robot.intake.raiseFlower();
                     autoState++;
+                    robot.intake.raiseFlower();
                     break;
                 }
 
@@ -124,6 +129,9 @@ public class TwoTipAuto extends LiveAutoBase {
         robot.addData("Follower Pose: ", robot.follower.pose());
         robot.addData("path:", robot.follower.currentPath() != null ? robot.follower.currentPath() : "null");
         robot.updateTelemetry();
+        if(autoState != 4 && autoState != 5){
+            robot.intake.raiseFlower();
+        }
 
         // Call the dashboard drawing method
         drawRobotToDashboard();

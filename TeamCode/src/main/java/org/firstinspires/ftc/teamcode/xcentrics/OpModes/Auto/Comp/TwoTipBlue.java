@@ -1,13 +1,23 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.Comp;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.canvas.Canvas;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.pedropathing.math.Pose;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.LiveAutoBase;
 import org.firstinspires.ftc.teamcode.xcentrics.paths.BlueAutoPaths;
-@Autonomous(name = "Blue Two Tip Auto")
+import org.firstinspires.ftc.teamcode.xcentrics.paths.Paths1;
+
+@Autonomous(name = "Two Tip Auto Blue", group = "Auto")
 public class TwoTipBlue extends LiveAutoBase {
     private static int autoState = 0;
     private BlueAutoPaths paths = new BlueAutoPaths();
+
+    // Initialize FtcDashboard instance
+
+
     @Override
     public void on_init() {
         robot.follower.setPose(paths.start);
@@ -27,7 +37,6 @@ public class TwoTipBlue extends LiveAutoBase {
     @Override
     public void on_loop() {
 
-
         switch (autoState){
             case 0:
                 robot.shooter.spinUp();
@@ -42,6 +51,7 @@ public class TwoTipBlue extends LiveAutoBase {
                     robot.shooter.spinDown();
                     robot.intake.intake();
                     followPath(paths.path1());
+                    robot.shooter.spinDown();
                     autoState++;
                     break;
                 }
@@ -71,12 +81,14 @@ public class TwoTipBlue extends LiveAutoBase {
 
             case 5:
                 if(!robot.follower.isBusy()){
-                    robot.intake.intake();
                     robot.intake.lowerFlower();
+                    robot.intake.intake();
                     robot.halt(1);
                     followPath(paths.path4());
                     robot.halt(3);
+                    robot.intake.raiseFlower();
                     autoState++;
+                    robot.intake.raiseFlower();
                     break;
                 }
 
@@ -84,7 +96,9 @@ public class TwoTipBlue extends LiveAutoBase {
                 if(!robot.follower.isBusy()){
                     robot.intake.raiseFlower();
                     followPath(paths.path5());
+                    robot.intake.raiseFlower();
                     autoState++;
+                    robot.intake.raiseFlower();
                     break;
                 }
 
@@ -108,12 +122,16 @@ public class TwoTipBlue extends LiveAutoBase {
                 break;
 
         }
-        robot.addData("Auto State: ",autoState);
-        robot.addData("Robot Pose: ",robot.getRobotPose());
-        robot.addData("Follower Headding: ",Math.toDegrees(robot.follower.pose().heading()));
-        robot.addData("Follower Pose: ",robot.follower.pose());
-        robot.addData("path:",robot.follower.currentPath() != null ? robot.follower.currentPath() : "null");
+
+        robot.addData("Auto State: ", autoState);
+        robot.addData("Robot Pose: ", robot.getRobotPose());
+        robot.addData("Follower Headding: ", Math.toDegrees(robot.follower.pose().heading()));
+        robot.addData("Follower Pose: ", robot.follower.pose());
+        robot.addData("path:", robot.follower.currentPath() != null ? robot.follower.currentPath() : "null");
         robot.updateTelemetry();
+        if(autoState != 4 && autoState != 5){
+            robot.intake.raiseFlower();
+        }
 
     }
 }

@@ -67,7 +67,11 @@ public class Shooter extends Component {
         } else {
             gate.queue_power(0);
         }
-        setShooterPID(TARGET_SPEED);
+        if(TARGET_SPEED >-1) {
+            setShooterPID(TARGET_SPEED);
+        } else {
+            fly.queue_power(-0.5);
+        }
         gate.update();
         fly.update();
     }
