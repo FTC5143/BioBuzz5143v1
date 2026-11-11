@@ -159,6 +159,7 @@ public class Robot {
 
         // Update telemetry on the dashboard and on the phones
         if (cycle % RobotConfig.TELEMETRY_CYCLE == 0) {
+            packet = new TelemetryPacket();
             updateTelemetry();
 
             for (Component component : components) {
@@ -166,7 +167,7 @@ public class Robot {
             }
 
             telemetry.update();
-
+            dashboard.sendTelemetryPacket(packet);
         }
 
         // Recalculate our update thread frequency
@@ -195,7 +196,6 @@ public class Robot {
         addData("[RBT "+name+"]", components.size()+" components");
         addData("FREQ", update_freq);
         telemetry.update();
-        dashboard.sendTelemetryPacket(packet);
     }
     public void addData(String caption, Object value){
         telemetry.addData(caption,value);

@@ -26,5 +26,5 @@ dependencies {
     //implementation 'com.bylazar:fullpanels:1.0.19'
     //implementation "com.bylazar:field:1.0.10"
     implementation 'com.acmerobotics.dashboard:dashboard:0.6.0'
-    implementation 'com.pedropathing.ivy:pedro:1.1.1'
+    annotationProcessor 'com.acmerobotics.dashboard:dashboard:0.6.0'
 }
