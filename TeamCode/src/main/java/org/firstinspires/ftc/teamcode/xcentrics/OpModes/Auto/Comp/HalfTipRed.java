@@ -1,8 +1,10 @@
 package org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.Comp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
 import org.firstinspires.ftc.teamcode.xcentrics.OpModes.Auto.LiveAutoBase;
 import org.firstinspires.ftc.teamcode.xcentrics.paths.HalfTipPaths;
-
+@Autonomous(name = "Half Tip Red", group = "Red")
 public class HalfTipRed extends LiveAutoBase {
     private HalfTipPaths paths = new HalfTipPaths();
     private int autoState = 0;
